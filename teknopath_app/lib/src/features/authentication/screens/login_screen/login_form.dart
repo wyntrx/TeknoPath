@@ -10,7 +10,7 @@ class LoginForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return Form(
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: 30.0 - 10.0),
+        padding: const EdgeInsets.symmetric(vertical: 30.0 - 10.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -25,7 +25,7 @@ class LoginForm extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            Text(
+            const Text(
               "Ex. 12-345-678",
             ),
             const SizedBox(
@@ -42,7 +42,7 @@ class LoginForm extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            Text(
+            const Text(
               "Ex. doe.john@cit.edu",
             ),
             const SizedBox(
@@ -98,7 +98,7 @@ class LoginForm extends StatelessWidget {
                   "Forgot Password",
                   style: GoogleFonts.poppins(
                     fontSize: 16.0,
-                    color: Color(0xFF820001),
+                    color: const Color(0xFF820001),
                   ),
                 ),
               ),

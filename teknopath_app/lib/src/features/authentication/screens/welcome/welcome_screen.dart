@@ -14,12 +14,12 @@ class Welcome extends StatelessWidget {
     var height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.all(30.0),
+        padding: const EdgeInsets.all(30.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Image(
-              image: AssetImage('assets/images/welcome.png'),
+              image: const AssetImage('assets/images/welcome.png'),
               height: height * 0.6,
             ),
             Column(
@@ -40,10 +40,11 @@ class Welcome extends StatelessWidget {
                   child: ElevatedButton(
                       onPressed: () => Get.to(() => const LoginScreen()),
                       style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(),
+                        shape: const RoundedRectangleBorder(),
                         foregroundColor: tWhiteColor,
                         backgroundColor: tSecondaryColor,
-                        padding: EdgeInsets.symmetric(vertical: tButtonHeight),
+                        padding:
+                            const EdgeInsets.symmetric(vertical: tButtonHeight),
                       ),
                       child: Text("Login".toUpperCase())),
                 ),
