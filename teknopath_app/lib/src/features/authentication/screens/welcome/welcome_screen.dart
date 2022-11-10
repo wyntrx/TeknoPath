@@ -40,7 +40,8 @@ class Welcome extends StatelessWidget {
                   child: ElevatedButton(
                       onPressed: () => Get.to(() => const LoginScreen()),
                       style: ElevatedButton.styleFrom(
-                        shape: const RoundedRectangleBorder(),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0)),
                         foregroundColor: tWhiteColor,
                         backgroundColor: tSecondaryColor,
                         padding:

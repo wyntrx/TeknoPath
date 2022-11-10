@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:teknopath_app/src/constants/sizes.dart';
-import 'package:teknopath_app/src/constants/text_strings.dart';
+import 'package:teknopath_app/src/features/authentication/screens/login_screen/otp_screen/otp_screen.dart';
+import '../forgot_password/forgot_pass_option/forget_password_model_bottom_sheet.dart';
 
 class LoginForm extends StatelessWidget {
   const LoginForm({super.key});
@@ -15,12 +16,17 @@ class LoginForm extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextFormField(
-              decoration: const InputDecoration(
-                prefixIcon: Icon(Icons.person_outline_outlined),
+              decoration: InputDecoration(
+                prefixIcon: const Icon(Icons.person_outline_outlined,
+                    color: Color(0xFF820001)),
                 labelText: "ID Number",
                 hintText: "Enter your ID number",
-                border: OutlineInputBorder(),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
               ),
+              style: GoogleFonts.montserrat(
+                  fontSize: 18.0, fontWeight: FontWeight.w500),
             ),
             const SizedBox(
               height: 10,
@@ -32,12 +38,19 @@ class LoginForm extends StatelessWidget {
               height: 10,
             ),
             TextFormField(
-              decoration: const InputDecoration(
-                prefixIcon: Icon(Icons.email),
-                labelText: "Institutional Email",
+              decoration: InputDecoration(
+                prefixIcon: const Icon(
+                  Icons.email,
+                  color: Color(0xFF820001),
+                ),
+                labelText: "Email",
                 hintText: "Enter your Email",
-                border: OutlineInputBorder(),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
               ),
+              style: GoogleFonts.montserrat(
+                  fontSize: 18.0, fontWeight: FontWeight.w500),
             ),
             const SizedBox(
               height: 10,
@@ -52,47 +65,7 @@ class LoginForm extends StatelessWidget {
               alignment: Alignment.centerRight,
               child: TextButton(
                 onPressed: () {
-                  showModalBottomSheet(
-                    context: context,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0)),
-                    builder: (context) => Container(
-                      padding: const EdgeInsets.all(tDefaultSize),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            tForgetPasswordTitle,
-                            style: GoogleFonts.montserrat(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 30,
-                            ),
-                          ),
-                          Text(
-                            tForgetPasswordSubtitle,
-                            style: GoogleFonts.poppins(
-                              fontSize: 16,
-                            ),
-                          ),
-                          const SizedBox(height: tDefaultSize),
-                          ForgetPasswordBtnWidget(
-                            btnIcon: Icons.mail_outline_rounded,
-                            title: tEmail,
-                            subtitle: tResetViaEmail,
-                            onTap: () {},
-                          ),
-                          const SizedBox(height: tDefaultSize),
-                          ForgetPasswordBtnWidget(
-                            btnIcon: Icons.mobile_friendly_rounded,
-                            title: tPhone,
-                            subtitle: tResetViaPhone,
-                            onTap: () {},
-                          ),
-                          const SizedBox(height: tDefaultSize),
-                        ],
-                      ),
-                    ),
-                  );
+                  ForgetPasswordScreen.buildShowModalBottomSheet(context);
                 },
                 child: Text(
                   "Forgot Password",
@@ -106,60 +79,13 @@ class LoginForm extends StatelessWidget {
             SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                    onPressed: () {}, child: Text("Login".toUpperCase())))
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class ForgetPasswordBtnWidget extends StatelessWidget {
-  const ForgetPasswordBtnWidget({
-    required this.btnIcon,
-    required this.title,
-    required this.subtitle,
-    required this.onTap,
-    Key? key,
-  }) : super(key: key);
-
-  final IconData btnIcon;
-  final String title, subtitle;
-  final VoidCallback onTap;
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.all(20.0),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10.0),
-            color: Colors.grey.shade200),
-        child: Row(
-          children: [
-            Icon(
-              btnIcon,
-              size: 60.0,
-            ),
-            const SizedBox(width: 10.0),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: GoogleFonts.montserrat(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                  ),
-                ),
-                Text(
-                  subtitle,
-                  style: GoogleFonts.poppins(
-                    fontSize: 16.0,
-                  ),
-                ),
-              ],
-            ),
+                    onPressed: () {
+                      Get.to(() => const OTPScreen());
+                    },
+                    style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0))),
+                    child: Text("Login".toUpperCase()))),
           ],
         ),
       ),

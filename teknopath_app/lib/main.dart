@@ -17,7 +17,6 @@ class MyApp extends StatelessWidget {
       theme: TAppTheme.lightTheme,
       darkTheme: TAppTheme.darkTheme,
       themeMode: ThemeMode.system,
-      title: 'Welcome to Flutter',
       home: const SplashScreen(),
     );
   }
