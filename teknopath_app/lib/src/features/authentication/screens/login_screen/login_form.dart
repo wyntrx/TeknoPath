@@ -2,9 +2,45 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:teknopath_app/src/constants/sizes.dart';
 import 'package:teknopath_app/src/constants/text_strings.dart';
+import 'package:http/http.dart' as http;
+import 'package:fluttertoast/fluttertoast.dart';
+import 'dart:convert';
 
 class LoginForm extends StatelessWidget {
-  const LoginForm({super.key});
+  LoginForm({super.key});
+
+  TextEditingController email = TextEditingController();
+  TextEditingController idNumber = TextEditingController();
+
+  Future login(BuildContext context) async {
+    if (email.text == "" || idNumber.text == "") {
+      Fluttertoast.showToast(
+        msg: "Email or ID field cannot be blank.",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        fontSize: 16.0,
+      );
+    } else {
+      var url = "https://teknopath.000webhostapp.com/login.php";
+      var response = await http.post(Uri.parse(url), body: {
+        "student_email": email.text,
+        "student_id": idNumber.text,
+      });
+
+      var data = json.decode(response.body);
+      if (data == "Success") {
+        //Navigator push to otp screen
+        //Navigator.push(context, MaterialPageRoute(builder: (context) => addScreenhere()))
+      } else {
+        Fluttertoast.showToast(
+          msg: "Email or ID may be incorrect! Try again",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          fontSize: 16.0,
+        );
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +51,7 @@ class LoginForm extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextFormField(
+              controller: idNumber,
               decoration: const InputDecoration(
                 prefixIcon: Icon(Icons.person_outline_outlined),
                 labelText: "ID Number",
@@ -25,13 +62,14 @@ class LoginForm extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            Text(
+            const Text(
               "Ex. 12-345-678",
             ),
             const SizedBox(
               height: 10,
             ),
             TextFormField(
+              controller: email,
               decoration: const InputDecoration(
                 prefixIcon: Icon(Icons.email),
                 labelText: "Institutional Email",
@@ -106,7 +144,10 @@ class LoginForm extends StatelessWidget {
             SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                    onPressed: () {}, child: Text("Login".toUpperCase())))
+                    onPressed: () {
+                      login(context);
+                    },
+                    child: Text("Login".toUpperCase())))
           ],
         ),
       ),
