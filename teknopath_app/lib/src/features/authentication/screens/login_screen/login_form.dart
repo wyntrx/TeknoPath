@@ -33,8 +33,10 @@ class LoginForm extends StatelessWidget {
       var data = json.decode(response.body);
       if (data == "Success") {
         //Navigator push to otp screen
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const OTPScreen()));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => OTPScreen()));
+        // Navigator.push(context,
+        //     MaterialPageRoute(builder: (context) => OTPScreen()));
         //Get.to(() => const OTPScreen());
       } else {
         Fluttertoast.showToast(
@@ -151,6 +153,8 @@ class LoginForm extends StatelessWidget {
                 child: ElevatedButton(
                     onPressed: () {
                       login(context);
+                      // Navigator.push(context,
+                      //     MaterialPageRoute(builder: (context) => OTPScreen()));
                     },
                     child: Text("Login".toUpperCase())))
           ],
