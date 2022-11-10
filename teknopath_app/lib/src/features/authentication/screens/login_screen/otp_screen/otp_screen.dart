@@ -58,7 +58,7 @@ class OTPScreen extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                  onPressed: () {}, child: const Text("Submit Code")),
+                  onPressed: () {}, child: const Text("SUBMIT CODE")),
             ),
           ],
         ),
