@@ -38,7 +38,13 @@ class Welcome extends StatelessWidget {
               children: [
                 Expanded(
                   child: ElevatedButton(
-                      onPressed: () => Get.to(() => const LoginScreen()),
+                      //onPressed: () => Get.to(() => const LoginScreen()),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const LoginScreen()));
+                      },
                       style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10.0)),

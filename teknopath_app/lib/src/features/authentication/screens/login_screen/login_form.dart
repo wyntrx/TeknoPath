@@ -33,8 +33,8 @@ class LoginForm extends StatelessWidget {
       var data = json.decode(response.body);
       if (data == "Success") {
         //Navigator push to otp screen
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => OTPScreen()));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const OTPScreen()));
         //Get.to(() => const OTPScreen());
       } else {
         Fluttertoast.showToast(
