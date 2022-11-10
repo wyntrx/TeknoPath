@@ -31,13 +31,11 @@ class LoginForm extends StatelessWidget {
       });
 
       var data = json.decode(response.body);
+
       if (data == "Success") {
         //Navigator push to otp screen
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => OTPScreen()));
-        // Navigator.push(context,
-        //     MaterialPageRoute(builder: (context) => OTPScreen()));
-        //Get.to(() => const OTPScreen());
       } else {
         Fluttertoast.showToast(
           msg: "Email or ID may be incorrect! Try again",
