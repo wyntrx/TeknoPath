@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:teknopath_app/src/constants/sizes.dart';
 import 'package:teknopath_app/src/constants/text_strings.dart';
 import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
 import 'dart:convert';
+
+import 'package:teknopath_app/src/features/authentication/screens/login_screen/otp_screen/otp_screen.dart';
 
 class LoginForm extends StatelessWidget {
   LoginForm({super.key});
@@ -30,7 +33,9 @@ class LoginForm extends StatelessWidget {
       var data = json.decode(response.body);
       if (data == "Success") {
         //Navigator push to otp screen
-        //Navigator.push(context, MaterialPageRoute(builder: (context) => addScreenhere()))
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => OTPScreen()));
+        //Get.to(() => const OTPScreen());
       } else {
         Fluttertoast.showToast(
           msg: "Email or ID may be incorrect! Try again",
