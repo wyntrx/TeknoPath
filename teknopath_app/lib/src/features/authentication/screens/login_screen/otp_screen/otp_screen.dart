@@ -10,9 +10,11 @@ class OTPScreen extends StatelessWidget {
 
   OTPScreen({super.key, required this.otp});
 
-  // void verifyCode(){
-  //   if(this.otp == $code)
-  // }
+  void verifyCode(String inputCode) {
+    if (otp == inputCode) {
+      print('same');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,8 +58,9 @@ class OTPScreen extends StatelessWidget {
               numberOfFields: 6,
               fillColor: Colors.black.withOpacity(0.1),
               filled: true,
-              onSubmit: (code) {
-                print("OTP is => $code");
+              onSubmit: (String code) {
+                // print("OTP is => $code");
+                verifyCode(code);
               },
             ),
             const SizedBox(
