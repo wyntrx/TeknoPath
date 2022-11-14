@@ -6,6 +6,7 @@ import 'package:teknopath_app/src/constants/text_strings.dart';
 import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
 import 'dart:convert';
+import 'package:otp/otp.dart';
 
 import 'package:teknopath_app/src/features/authentication/screens/login_screen/otp_screen/otp_screen.dart';
 
@@ -14,6 +15,44 @@ class LoginForm extends StatelessWidget {
 
   TextEditingController email = TextEditingController();
   TextEditingController idNumber = TextEditingController();
+
+  String generateOTP() {
+    String otp;
+    //otp = OTP.generateHOTPCodeString("ORSWW3TPOBQXI2B8", 4);
+    otp = OTP.generateTOTPCodeString(
+        "ORSWW3TPOBQXI2BB", DateTime.now().millisecondsSinceEpoch,
+        interval: 10);
+
+    return otp;
+  }
+
+  Future sendOTPToEmail({
+    required String student_id,
+    required String student_email,
+    required String otpCode,
+  }) async {
+    const serviceId = 'service_etgyg9j';
+    const templateId = 'template_rwu937u';
+    const userId = 'lYTTj0hNFHYeQxHmi';
+
+    final url = Uri.parse("https://api.emailjs.com/api/v1.0/email/send");
+    final response = await http.post(
+      url,
+      headers: {
+        'origin': 'http://localhost',
+        'Content-Type': 'application/json',
+      },
+      body: json.encode({
+        'service_id': serviceId,
+        'template_id': templateId,
+        'user_id': userId,
+        'template_params': {
+          'student_receiver': email.text,
+          'otpCode': otpCode,
+        },
+      }),
+    );
+  }
 
   Future login(BuildContext context) async {
     if (email.text == "" || idNumber.text == "") {
@@ -24,6 +63,7 @@ class LoginForm extends StatelessWidget {
         fontSize: 16.0,
       );
     } else {
+      String otp = generateOTP();
       var url = "https://teknopath.000webhostapp.com/login.php";
       var response = await http.post(Uri.parse(url), body: {
         "student_email": email.text,
@@ -33,9 +73,16 @@ class LoginForm extends StatelessWidget {
       var data = json.decode(response.body);
 
       if (data == "Success") {
+        //send email with otp
+        //endOTPToEmail(student_id: idNumber.text, student_email: email.text);
+        sendOTPToEmail(
+            student_id: idNumber.text, student_email: email.text, otpCode: otp);
         //Navigator push to otp screen
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => OTPScreen()));
+        // ignore: use_build_context_synchronously
+        // Navigator.push(
+        //     context, MaterialPageRoute(builder: (context) => OTPScreen()));
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => OTPScreen(otp: otp)));
       } else {
         Fluttertoast.showToast(
           msg: "Email or ID may be incorrect! Try again",
@@ -151,8 +198,6 @@ class LoginForm extends StatelessWidget {
                 child: ElevatedButton(
                     onPressed: () {
                       login(context);
-                      // Navigator.push(context,
-                      //     MaterialPageRoute(builder: (context) => OTPScreen()));
                     },
                     child: Text("Login".toUpperCase())))
           ],

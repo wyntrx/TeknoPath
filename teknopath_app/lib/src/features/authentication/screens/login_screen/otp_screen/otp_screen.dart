@@ -4,7 +4,15 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:teknopath_app/src/constants/sizes.dart';
 
 class OTPScreen extends StatelessWidget {
-  const OTPScreen({super.key});
+  //const OTPScreen({super.key});
+
+  String otp;
+
+  OTPScreen({super.key, required this.otp});
+
+  // void verifyCode(){
+  //   if(this.otp == $code)
+  // }
 
   @override
   Widget build(BuildContext context) {
