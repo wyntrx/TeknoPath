@@ -4,11 +4,11 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
-import 'package:teknopath/api_connection/api_connection.dart';
+import 'package:teknopath/users/authentication/otp_screen.dart';
 import 'package:teknopath/users/authentication/signup_screen.dart';
-import 'package:teknopath/users/fragments/dashboard_of_fragmets.dart';
 import 'package:teknopath/users/models/user.dart';
 import 'package:teknopath/users/userPreferences/user_preferences.dart';
+import 'package:teknopath/helper/otpGeneration.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -19,26 +19,61 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   var formKey = GlobalKey<FormState>();
-  //var nameController = TextEditingController();
+
   var emailController = TextEditingController();
-  //var passwordController = TextEditingController();
   var studentIdController = TextEditingController();
+
   var isObsecure = true.obs;
+  var otpHelper = OTPGeneration();
 
-  loginUserNow() async {
-    try {
-      var res = await http.post(
-        Uri.parse(API.login),
-        body: {
-          "student_id": studentIdController.text.trim(),
-          "student_email": emailController.text.trim(),
+  Future sendOTPToEmail({
+    required String student_id,
+    required String student_email,
+    required String otpCode,
+  }) async {
+    const serviceId = 'service_etgyg9j';
+    const templateId = 'template_rwu937u';
+    const userId = 'lYTTj0hNFHYeQxHmi';
+
+    final url = Uri.parse("https://api.emailjs.com/api/v1.0/email/send");
+    final response = await http.post(
+      url,
+      headers: {
+        'origin': 'http://localhost',
+        'Content-Type': 'application/json',
+      },
+      body: json.encode({
+        'service_id': serviceId,
+        'template_id': templateId,
+        'user_id': userId,
+        'template_params': {
+          'student_receiver': emailController.text.trim(),
+          'otpCode': otpCode,
         },
-      );
+      }),
+    );
+  }
 
-      if (res.statusCode == 200) {
-        var resBodyOfLogin = jsonDecode(res.body);
+  loginUserNow(BuildContext context) async {
+    try {
+      String otp = otpHelper.generateOTP();
+      var url = "https://teknopath.000webhostapp.com/login.php";
+      var response = await http.post(Uri.parse(url), body: {
+        "student_email": emailController.text.trim(),
+        "student_id": studentIdController.text.trim(),
+      });
+      if (response.statusCode == 200) {
+        var resBodyOfLogin = jsonDecode(response.body);
+
+        //var resBodyOfLogin = json.decode(response.body);
+
         if (resBodyOfLogin['success'] == true) {
           Fluttertoast.showToast(msg: "Login Successful!");
+
+          sendOTPToEmail(
+              student_id: studentIdController.text.trim(),
+              student_email: emailController.text.trim(),
+              otpCode: otp);
 
           Student userInfo = Student.fromJson(resBodyOfLogin["userData"]);
 
@@ -48,7 +83,10 @@ class _LoginScreenState extends State<LoginScreen> {
           Future.delayed(
             Duration(microseconds: 2000),
             () {
-              Get.to(() => DashboardOfFragments());
+              // Get.to(() => DashboardOfFragments());
+              // Get.to(() => OTPScreen(otp: otp));
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => OTPScreen(otp: otp)));
             },
           );
         } else {
@@ -279,7 +317,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                           onTap: () {
                                             if (formKey.currentState!
                                                 .validate()) {
-                                              loginUserNow();
+                                              loginUserNow(context);
                                             }
                                           },
                                           borderRadius:

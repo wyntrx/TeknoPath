@@ -6,21 +6,26 @@ import 'package:get/get.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 import 'package:teknopath/constants/sizes.dart';
+import 'package:teknopath/users/fragments/dashboard_of_fragmets.dart';
 
 class OTPScreen extends StatelessWidget {
   //const OTPScreen({super.key});
 
-  //String otp;
+  String otp;
 
-  // OTPScreen({super.key, required this.otp});
+  OTPScreen({super.key, required this.otp});
 
-  // void verifyCode(BuildContext context, String inputCode) {
-  //   if (otp == inputCode) {
-  //     // print('same');
-  //     Navigator.of(context)
-  //         .push(MaterialPageRoute(builder: (context) => Dashboard()));
-  //   }
-  // }
+  void verifyCode(BuildContext context, String inputCode) {
+    if (otp == inputCode) {
+      // print('same');
+      Future.delayed(
+        Duration(microseconds: 2000),
+        () {
+          Get.to(() => DashboardOfFragments());
+        },
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +38,7 @@ class OTPScreen extends StatelessWidget {
           //crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Image(
-              image: const AssetImage("assets/images/otp.png"),
+              image: const AssetImage("images/otp.png"),
               height: size.height * 0.3,
             ),
             Text(
@@ -72,9 +77,9 @@ class OTPScreen extends StatelessWidget {
               borderRadius: const BorderRadius.all(Radius.circular(10.0)),
               fieldWidth: 45.0,
               onSubmit: (code) {
-                //var inputedOTP = code;
+                var inputedOTP = code;
                 //print("OTP => $inputedOTP");
-                //verifyCode(context, inputedOTP);
+                verifyCode(context, inputedOTP);
               },
             ),
             const SizedBox(
