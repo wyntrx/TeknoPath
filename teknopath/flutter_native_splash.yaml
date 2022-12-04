@@ -1,0 +1,8 @@
+flutter_native_splash:
+  color: "#ffffff"
+  image: images/teknopath_logo.png
+
+  color_dark: "#121212"
+  image_dark: images/teknopath_logo.png
+
+  web: false
