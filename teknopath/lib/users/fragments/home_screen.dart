@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:teknopath/constants/colors.dart';
+import 'package:teknopath/users/fragments/about_us_screen.dart';
+import 'package:teknopath/users/fragments/profile_fragment.dart';
+import 'package:teknopath/users/fragments/settings_screen.dart';
 import 'package:teknopath/users/userPreferences/current_user.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -23,8 +27,8 @@ class HomeScreen extends StatelessWidget {
                 boxShadow: [
                   const BoxShadow(
                     color: Color(0xFF999367),
-                    blurRadius: 3,
-                    offset: Offset(0, 2),
+                    blurRadius: 2,
+                    offset: Offset(1, 1),
                   ),
                   BoxShadow(
                     color: Colors.grey.shade300,
@@ -44,7 +48,7 @@ class HomeScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(50),
                         border: Border.all(
                             width: 3,
-                            color: Color(0xFF820001),
+                            color: tSecondaryColor,
                             strokeAlign: StrokeAlign.outside),
                         image: const DecorationImage(
                           image: AssetImage("images/avatar.png"),
@@ -63,6 +67,7 @@ class HomeScreen extends StatelessWidget {
                           style: GoogleFonts.montserrat(
                             fontWeight: FontWeight.w400,
                             fontSize: 16,
+                            color: Colors.black87,
                           ),
                         ),
                         Text(
@@ -70,12 +75,15 @@ class HomeScreen extends StatelessWidget {
                           style: GoogleFonts.montserrat(
                             fontWeight: FontWeight.w600,
                             fontSize: 20,
+                            color: Colors.black87,
                           ),
                         ),
                         Text(
                           _currentUser.student.student_email,
                           style: GoogleFonts.montserrat(
-                              fontWeight: FontWeight.w500, fontSize: 14),
+                              fontWeight: FontWeight.w500,
+                              fontSize: 14,
+                              color: Colors.black87),
                         ),
                       ],
                     ),
@@ -94,20 +102,21 @@ class HomeScreen extends StatelessWidget {
                 child: Container(
                   padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
-                      color: const Color(0xFFFFDF01),
-                      borderRadius: BorderRadius.circular(30),
-                      boxShadow: [
-                        const BoxShadow(
-                          color: Color(0xFF999367),
-                          blurRadius: 3,
-                          offset: Offset(0, 2),
-                        ),
-                        BoxShadow(
-                          color: Colors.grey.shade300,
-                          offset: const Offset(-2, 0),
-                          blurRadius: 3,
-                        ),
-                      ]),
+                    color: tPrimaryColor,
+                    borderRadius: BorderRadius.circular(30),
+                    boxShadow: [
+                      const BoxShadow(
+                        color: Color(0xFF999367),
+                        blurRadius: 3,
+                        offset: Offset(1, 1),
+                      ),
+                      BoxShadow(
+                        color: Colors.grey.shade300,
+                        offset: const Offset(-2, 0),
+                        blurRadius: 3,
+                      ),
+                    ],
+                  ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -116,13 +125,12 @@ class HomeScreen extends StatelessWidget {
                         size: 30,
                         color: Color(0xFF820001),
                       ),
-                      Text(
-                        "Favorites",
-                        style: GoogleFonts.montserrat(
+                      Text("Favorites",
+                          style: GoogleFonts.montserrat(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
-                            color: Colors.white),
-                      ),
+                            color: Colors.black87,
+                          )),
                       const Icon(
                         Icons.arrow_forward_ios,
                         size: 30,
@@ -184,7 +192,7 @@ class HomeScreen extends StatelessWidget {
                                     children: [
                                       const Icon(
                                         Icons.location_on,
-                                        color: Color(0xFF820001),
+                                        color: tSecondaryColor,
                                       ),
                                       const SizedBox(
                                         width: 10,
@@ -242,7 +250,7 @@ class HomeScreen extends StatelessWidget {
                                     children: [
                                       const Icon(
                                         Icons.location_on,
-                                        color: Color(0xFF820001),
+                                        color: tSecondaryColor,
                                       ),
                                       const SizedBox(
                                         width: 10,

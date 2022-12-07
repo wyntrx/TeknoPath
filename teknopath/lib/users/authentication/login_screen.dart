@@ -4,6 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
+import 'package:teknopath/constants/colors.dart';
 import 'package:teknopath/users/authentication/otp_screen.dart';
 import 'package:teknopath/users/authentication/signup_screen.dart';
 import 'package:teknopath/users/models/user.dart';
@@ -128,7 +129,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     padding: const EdgeInsets.all(16.0),
                     child: Container(
                       decoration: const BoxDecoration(
-                        color: Colors.amber,
+                        color: tPrimaryColor,
                         borderRadius: BorderRadius.all(
                           Radius.circular(60),
                         ),
@@ -163,7 +164,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         decoration: InputDecoration(
                                           prefixIcon: const Icon(
                                             Icons.person_rounded,
-                                            color: Color(0xFF820001),
+                                            color: tSecondaryColor,
                                           ),
                                           labelText: "Student ID",
                                           labelStyle: GoogleFonts.poppins(
@@ -219,8 +220,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                       Container(
                                         padding:
                                             const EdgeInsets.only(left: 20.0),
-                                        child: const Text(
+                                        child: Text(
                                           "Ex. 12-345-678",
+                                          style: GoogleFonts.poppins(
+                                            color: Colors.black87,
+                                          ),
                                         ),
                                       ),
                                       const SizedBox(
@@ -228,68 +232,73 @@ class _LoginScreenState extends State<LoginScreen> {
                                       ),
                                       //email
                                       TextFormField(
-                                          controller: emailController,
-                                          validator: (val) => val == ""
-                                              ? "Please enter your Email"
-                                              : null,
-                                          decoration: InputDecoration(
-                                            prefixIcon: const Icon(
-                                              Icons.email_rounded,
-                                              color: Color(0xFF820001),
-                                            ),
-                                            labelText: "Email",
-                                            labelStyle: GoogleFonts.poppins(
-                                                fontSize: 18.0,
-                                                fontWeight: FontWeight.w500,
-                                                color: Colors.black54),
-                                            border: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(30),
-                                              borderSide: const BorderSide(
-                                                color: Colors.white60,
-                                              ),
-                                            ),
-                                            enabledBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(30),
-                                              borderSide: const BorderSide(
-                                                color: Colors.white60,
-                                              ),
-                                            ),
-                                            focusedBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(30),
-                                              borderSide: const BorderSide(
-                                                color: Colors.white60,
-                                              ),
-                                            ),
-                                            disabledBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(30),
-                                              borderSide: const BorderSide(
-                                                color: Colors.white60,
-                                              ),
-                                            ),
-                                            contentPadding:
-                                                const EdgeInsets.symmetric(
-                                              horizontal: 14,
-                                              vertical: 6,
-                                            ),
-                                            fillColor: Colors.white,
-                                            filled: true,
+                                        controller: emailController,
+                                        validator: (val) => val == ""
+                                            ? "Please enter your Email"
+                                            : null,
+                                        decoration: InputDecoration(
+                                          prefixIcon: const Icon(
+                                            Icons.email_rounded,
+                                            color: Color(0xFF820001),
                                           ),
-                                          style: GoogleFonts.poppins(
+                                          labelText: "Email",
+                                          labelStyle: GoogleFonts.poppins(
                                               fontSize: 18.0,
                                               fontWeight: FontWeight.w500,
-                                              color: Colors.grey[900])),
+                                              color: Colors.black54),
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(30),
+                                            borderSide: const BorderSide(
+                                              color: Colors.white60,
+                                            ),
+                                          ),
+                                          enabledBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(30),
+                                            borderSide: const BorderSide(
+                                              color: Colors.white60,
+                                            ),
+                                          ),
+                                          focusedBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(30),
+                                            borderSide: const BorderSide(
+                                              color: Colors.white60,
+                                            ),
+                                          ),
+                                          disabledBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(30),
+                                            borderSide: const BorderSide(
+                                              color: Colors.white60,
+                                            ),
+                                          ),
+                                          contentPadding:
+                                              const EdgeInsets.symmetric(
+                                            horizontal: 14,
+                                            vertical: 6,
+                                          ),
+                                          fillColor: Colors.white,
+                                          filled: true,
+                                        ),
+                                        style: GoogleFonts.poppins(
+                                          fontSize: 18.0,
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.grey[900],
+                                        ),
+                                      ),
                                       const SizedBox(
                                         height: 10,
                                       ),
                                       Container(
                                         padding:
                                             const EdgeInsets.only(left: 20.0),
-                                        child: const Text(
+                                        child: Text(
                                           "Ex. student@cit.edu",
+                                          style: GoogleFonts.poppins(
+                                            color: Colors.black87,
+                                          ),
                                         ),
                                       ),
 
@@ -311,7 +320,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         CrossAxisAlignment.center,
                                     children: [
                                       Material(
-                                        color: Color(0xFF820001),
+                                        color: tSecondaryColor,
                                         borderRadius: BorderRadius.circular(30),
                                         child: InkWell(
                                           onTap: () {
@@ -349,7 +358,12 @@ class _LoginScreenState extends State<LoginScreen> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                const Text("Are you an Admin?"),
+                                Text(
+                                  "Are you an Admin?",
+                                  style: GoogleFonts.poppins(
+                                    color: Colors.black87,
+                                  ),
+                                ),
                                 TextButton(
                                   onPressed: () {
                                     Get.to(() => SignUpScreen());
@@ -359,7 +373,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     style: GoogleFonts.poppins(
                                         fontSize: 16,
                                         fontWeight: FontWeight.w500,
-                                        color: Color(0xFF820001)),
+                                        color: tSecondaryColor),
                                   ),
                                 ),
                               ],

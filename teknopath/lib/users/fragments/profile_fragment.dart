@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:teknopath/constants/colors.dart';
 import 'package:teknopath/users/authentication/login_screen.dart';
+import 'package:teknopath/users/fragments/about_us_screen.dart';
+import 'package:teknopath/users/fragments/contact_us_screen.dart';
 import 'package:teknopath/users/userPreferences/current_user.dart';
 import 'package:teknopath/users/userPreferences/user_preferences.dart';
 
@@ -18,12 +21,16 @@ class ProfileFragment extends StatelessWidget {
           style: GoogleFonts.montserrat(
             fontSize: 20,
             fontWeight: FontWeight.bold,
+            color: Colors.black87,
           ),
         ),
         content: Text(
           "Are you sure you want to logout?",
-          style:
-              GoogleFonts.montserrat(fontSize: 18, fontWeight: FontWeight.w500),
+          style: GoogleFonts.montserrat(
+            fontSize: 18,
+            fontWeight: FontWeight.w500,
+            color: Colors.black87,
+          ),
         ),
         actions: [
           TextButton(
@@ -66,7 +73,7 @@ class ProfileFragment extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.amber),
+        border: Border.all(color: tPrimaryColor, width: 2.0),
         color: Colors.white,
       ),
       padding: const EdgeInsets.symmetric(
@@ -87,6 +94,7 @@ class ProfileFragment extends StatelessWidget {
             userData,
             style: TextStyle(
               fontSize: 15,
+              color: Colors.black87,
             ),
           ),
         ],
@@ -115,11 +123,11 @@ class ProfileFragment extends StatelessWidget {
           ),
           userInfoItemProfile(Icons.email, _currentUser.student.student_email),
           const SizedBox(
-            height: 10,
+            height: 20,
           ),
           Center(
             child: Material(
-              color: Color(0xFF820001),
+              color: Colors.black87,
               borderRadius: BorderRadius.circular(8),
               child: InkWell(
                 onTap: () {
@@ -142,6 +150,45 @@ class ProfileFragment extends StatelessWidget {
               ),
             ),
           ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextButton(
+                onPressed: () {
+                  Get.to(() => AboutUs());
+                },
+                child: Text(
+                  "About Us",
+                  style: GoogleFonts.montserrat(
+                    fontSize: 12.0,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.grey[500],
+                  ),
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  Get.to(() => ContactUs());
+                },
+                child: Text(
+                  "Contact Us",
+                  style: GoogleFonts.montserrat(
+                    fontSize: 12.0,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.grey[500],
+                  ),
+                ),
+              ),
+              Text(
+                "Version 1.0",
+                style: GoogleFonts.montserrat(
+                  fontSize: 12.0,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.grey[500],
+                ),
+              )
+            ],
+          )
         ],
       ),
     );

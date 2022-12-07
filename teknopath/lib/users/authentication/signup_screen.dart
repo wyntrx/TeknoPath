@@ -2,8 +2,10 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:teknopath/api_connection/api_connection.dart';
+import 'package:teknopath/constants/colors.dart';
 import 'package:teknopath/users/authentication/login_screen.dart';
 import 'package:teknopath/users/models/user.dart';
 
@@ -78,7 +80,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      //backgroundColor: Colors.black,
       body: LayoutBuilder(
         builder: (context, cons) {
           return ConstrainedBox(
@@ -89,18 +91,27 @@ class _SignUpScreenState extends State<SignUpScreen> {
               child: Column(
                 children: [
                   //signup screen header
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    height: 285,
-                    child: Image.asset("images/register.jpg"),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      height: 285,
+                      child: Image.asset("images/teknopath-icon-pic.png"),
+                    ),
                   ),
-
+                  Text(
+                    "CREATE USER",
+                    style: GoogleFonts.montserrat(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                   //signup form
                   Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Container(
                       decoration: const BoxDecoration(
-                        color: Colors.white24,
+                        color: tPrimaryColor,
                         borderRadius: BorderRadius.all(
                           Radius.circular(60),
                         ),
@@ -131,9 +142,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     decoration: InputDecoration(
                                       prefixIcon: const Icon(
                                         Icons.person_rounded,
-                                        color: Colors.black,
+                                        color: tSecondaryColor,
                                       ),
-                                      hintText: "Student ID",
+                                      labelText: "Student ID",
+                                      labelStyle: GoogleFonts.poppins(
+                                          fontSize: 18.0,
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.black54),
                                       border: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(30),
                                         borderSide: const BorderSide(
@@ -166,6 +181,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       fillColor: Colors.white,
                                       filled: true,
                                     ),
+                                    style: GoogleFonts.poppins(
+                                        fontSize: 18.0,
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.grey[900]),
                                   ),
                                   const SizedBox(
                                     height: 18,
@@ -179,9 +198,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     decoration: InputDecoration(
                                       prefixIcon: const Icon(
                                         Icons.email_rounded,
-                                        color: Colors.black,
+                                        color: tSecondaryColor,
                                       ),
-                                      hintText: "Email",
+                                      labelText: "Email",
+                                      labelStyle: GoogleFonts.poppins(
+                                          fontSize: 18.0,
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.black54),
                                       border: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(30),
                                         borderSide: const BorderSide(
@@ -214,6 +237,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       fillColor: Colors.white,
                                       filled: true,
                                     ),
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 18.0,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.grey[900],
+                                    ),
                                   ),
 
                                   const SizedBox(
@@ -226,7 +254,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                                   //button
                                   Material(
-                                    color: Colors.black,
+                                    color: tSecondaryColor,
                                     borderRadius: BorderRadius.circular(30),
                                     child: InkWell(
                                       onTap: () {
@@ -235,16 +263,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                         }
                                       },
                                       borderRadius: BorderRadius.circular(30),
-                                      child: const Padding(
+                                      child: Padding(
                                         padding: EdgeInsets.symmetric(
                                           vertical: 10,
                                           horizontal: 28,
                                         ),
                                         child: Text(
                                           "SignUp",
-                                          style: TextStyle(
+                                          style: GoogleFonts.poppins(
                                             color: Colors.white,
                                             fontSize: 16,
+                                            fontWeight: FontWeight.w500,
                                           ),
                                         ),
                                       ),
@@ -257,17 +286,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                const Text("Already have an Account?"),
+                                Text(
+                                  "Already have an Account?",
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 12,
+                                    color: Colors.black87,
+                                  ),
+                                ),
                                 TextButton(
                                   onPressed: () {
                                     Get.to(() => LoginScreen());
                                   },
-                                  child: const Text(
-                                    "Login Here",
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                    ),
-                                  ),
+                                  child: Text("Login Here",
+                                      style: GoogleFonts.poppins(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w500,
+                                          color: tSecondaryColor)),
                                 ),
                               ],
                             ),

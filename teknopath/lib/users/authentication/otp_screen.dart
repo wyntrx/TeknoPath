@@ -32,7 +32,7 @@ class OTPScreen extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
-        padding: const EdgeInsets.all(tDefaultSize),
+        padding: EdgeInsets.all(10.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           //crossAxisAlignment: CrossAxisAlignment.center,

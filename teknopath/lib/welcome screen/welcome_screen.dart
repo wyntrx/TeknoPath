@@ -14,7 +14,7 @@ class Welcome extends StatelessWidget {
     var height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Container(
-        padding: const EdgeInsets.all(30.0),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [

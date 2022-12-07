@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/state_manager.dart';
 import 'package:get/get.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:teknopath/constants/colors.dart';
 import 'package:teknopath/users/fragments/dashboard_controller.dart';
 import 'package:teknopath/users/fragments/favorite_fragment.dart';
 import 'package:teknopath/users/fragments/home_screen.dart';
@@ -50,7 +51,7 @@ class DashboardOfFragments extends StatelessWidget {
       },
       builder: (controller) {
         return Scaffold(
-          backgroundColor: Colors.white,
+          //backgroundColor: Colors.white,
           body: SafeArea(
               child: Obx(
             () => _fragmentScreens[
@@ -58,7 +59,7 @@ class DashboardOfFragments extends StatelessWidget {
           )),
           bottomNavigationBar: Container(
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: tPrimaryColor,
               boxShadow: [
                 BoxShadow(
                   blurRadius: 20,
@@ -90,16 +91,16 @@ class DashboardOfFragments extends StatelessWidget {
                   ],
                   rippleColor: Colors
                       .grey.shade800, // tab button ripple color when pressed
-                  hoverColor: Colors.grey.shade400, // tab button hover color
+                  hoverColor: Colors.white, // tab button hover color
                   haptic: true, // haptic feedback
                   tabBorderRadius: 30,
                   duration:
                       Duration(milliseconds: 300), // tab animation duration
                   gap: 8, // the tab button gap between icon and text
-                  color: Colors.grey[800], // unselected icon color
-                  activeColor: Colors.amber, // selected icon and text color
+                  color: tSecondaryColor, // unselected icon color
+                  activeColor: Colors.black87, // selected icon and text color
                   iconSize: 24, // tab button icon size
-                  tabBackgroundColor: Colors.amber.withOpacity(0.1),
+                  tabBackgroundColor: Colors.white,
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                   onTabChange: (value) {
                     bottomNavigationController.changeIndex(value);
