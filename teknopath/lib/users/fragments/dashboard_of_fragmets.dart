@@ -9,6 +9,7 @@ import 'package:teknopath/users/fragments/favorite_fragment.dart';
 import 'package:teknopath/users/fragments/home_screen.dart';
 import 'package:teknopath/users/fragments/profile_fragment.dart';
 import 'package:teknopath/users/userPreferences/current_user.dart';
+import 'package:teknopath/users/fragments/navigation_fragment.dart';
 
 class DashboardOfFragments extends StatelessWidget {
   final CurrentUser _rememberCurrentUser = Get.put(CurrentUser());
@@ -17,7 +18,7 @@ class DashboardOfFragments extends StatelessWidget {
 
   final List<Widget> _fragmentScreens = [
     HomeScreen(),
-    FavoriteFragment(),
+    NavigationUnity(),
     FavoriteFragment(),
     ProfileFragment(),
   ];

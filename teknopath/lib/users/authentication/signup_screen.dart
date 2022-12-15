@@ -26,9 +26,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   validateUserEmail() async {
     try {
-      var res = await http.post(Uri.parse(API.validateEmail), body: {
-        'student_email': emailController.text.trim(),
+      var url = "https://teknopath.000webhostapp.com/validate_email.php";
+      var res = await http.post(Uri.parse(url), body: {
+        "student_email": emailController.text.trim(),
       });
+      // var res = await http.post(Uri.parse(API.validateEmail), body: {
+      //   'student_email': emailController.text.trim(),
 
       if (res.statusCode == 200) // successful connection
       {
@@ -54,8 +57,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
 
     try {
+      var url = "https://teknopath.000webhostapp.com/signup.php";
       var res = await http.post(
-        Uri.parse(API.signUp),
+        Uri.parse(url),
         body: userModel.toJson(),
       );
 

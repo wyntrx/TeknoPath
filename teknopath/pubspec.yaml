@@ -47,6 +47,7 @@ dependencies:
   otp: 3.1.1
   google_nav_bar: ^5.0.6
   image_picker: ^0.8.6
+  flutter_unity_widget: ^2022.2.0
 
 dev_dependencies:
   flutter_test:
