@@ -64,7 +64,7 @@ class ProfileFragment extends StatelessWidget {
     if (resultResponse == "loggedOut") {
       //delete the user data from phone local storage
       RememberUserPrefs.removeUserInfo().then((value) {
-        Get.off(() => LoginScreen());
+        Get.off(() => const LoginScreen());
       });
     }
   }
@@ -85,14 +85,14 @@ class ProfileFragment extends StatelessWidget {
           Icon(
             iconData,
             size: 30,
-            color: Color(0xFF820001),
+            color: tSecondaryColor,
           ),
           const SizedBox(
             width: 10,
           ),
           Text(
             userData,
-            style: TextStyle(
+            style: GoogleFonts.montserrat(
               fontSize: 15,
               color: Colors.black87,
             ),
@@ -155,7 +155,7 @@ class ProfileFragment extends StatelessWidget {
             children: [
               TextButton(
                 onPressed: () {
-                  Get.to(() => AboutUs());
+                  Get.to(() => const AboutUs());
                 },
                 child: Text(
                   "About Us",
@@ -168,7 +168,7 @@ class ProfileFragment extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () {
-                  Get.to(() => ContactUs());
+                  Get.to(() => const ContactUs());
                 },
                 child: Text(
                   "Contact Us",

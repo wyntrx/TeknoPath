@@ -4,65 +4,62 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
-import 'package:teknopath/admin/admin_login.dart';
+import 'package:teknopath/admin/admin_panel.dart';
 import 'package:teknopath/constants/colors.dart';
-import 'package:teknopath/users/authentication/otp_screen.dart';
-import 'package:teknopath/users/authentication/signup_screen.dart';
-import 'package:teknopath/users/models/user.dart';
-import 'package:teknopath/users/userPreferences/user_preferences.dart';
-import 'package:teknopath/helper/otpGeneration.dart';
+import 'package:teknopath/users/authentication/login_screen.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class AdminLogin extends StatefulWidget {
+  const AdminLogin({Key? key}) : super(key: key);
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<AdminLogin> createState() => _AdminLoginState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _AdminLoginState extends State<AdminLogin> {
   var formKey = GlobalKey<FormState>();
 
-  var emailController = TextEditingController();
-  var studentIdController = TextEditingController();
-
+  // var emailController = TextEditingController();
+  // var studentIdController = TextEditingController();
+  var usernameController = TextEditingController();
+  var passwordController = TextEditingController();
   var isObsecure = true.obs;
-  var otpHelper = OTPGeneration();
+  // var otpHelper = OTPGeneration();
 
-  Future sendOTPToEmail({
-    required String student_id,
-    required String student_email,
-    required String otpCode,
-  }) async {
-    const serviceId = 'service_etgyg9j';
-    const templateId = 'template_rwu937u';
-    const userId = 'lYTTj0hNFHYeQxHmi';
+  // Future sendOTPToEmail({
+  //   required String student_id,
+  //   required String student_email,
+  //   required String otpCode,
+  // }) async {
+  //   const serviceId = 'service_etgyg9j';
+  //   const templateId = 'template_rwu937u';
+  //   const userId = 'lYTTj0hNFHYeQxHmi';
 
-    final url = Uri.parse("https://api.emailjs.com/api/v1.0/email/send");
-    final response = await http.post(
-      url,
-      headers: {
-        'origin': 'http://localhost',
-        'Content-Type': 'application/json',
-      },
-      body: json.encode({
-        'service_id': serviceId,
-        'template_id': templateId,
-        'user_id': userId,
-        'template_params': {
-          'student_receiver': emailController.text.trim(),
-          'otpCode': otpCode,
-        },
-      }),
-    );
-  }
+  //   final url = Uri.parse("https://api.emailjs.com/api/v1.0/email/send");
+  //   final response = await http.post(
+  //     url,
+  //     headers: {
+  //       'origin': 'http://localhost',
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: json.encode({
+  //       'service_id': serviceId,
+  //       'template_id': templateId,
+  //       'user_id': userId,
+  //       'template_params': {
+  //         'student_receiver': emailController.text.trim(),
+  //         'otpCode': otpCode,
+  //       },
+  //     }),
+  //   );
+  // }
 
-  loginUserNow(BuildContext context) async {
+  loginUserNow() async {
     try {
-      String otp = otpHelper.generateOTP();
-      var url = "https://teknopath.000webhostapp.com/login.php";
+      //String otp = otpHelper.generateOTP();
+      var url = "https://teknopath.000webhostapp.com/admin_login.php";
       var response = await http.post(Uri.parse(url), body: {
-        "student_email": emailController.text.trim(),
-        "student_id": studentIdController.text.trim(),
+        "username": usernameController.text.trim(),
+        "password": passwordController.text.trim(),
       });
       if (response.statusCode == 200) {
         var resBodyOfLogin = jsonDecode(response.body);
@@ -72,23 +69,23 @@ class _LoginScreenState extends State<LoginScreen> {
         if (resBodyOfLogin['success'] == true) {
           Fluttertoast.showToast(msg: "Login Successful!");
 
-          sendOTPToEmail(
-              student_id: studentIdController.text.trim(),
-              student_email: emailController.text.trim(),
-              otpCode: otp);
+          // sendOTPToEmail(
+          //     student_id: studentIdController.text.trim(),
+          //     student_email: emailController.text.trim(),
+          //     otpCode: otp);
 
-          Student userInfo = Student.fromJson(resBodyOfLogin["userData"]);
+          //Student userInfo = Student.fromJson(resBodyOfLogin["userData"]);
 
           //save user info to local storage
-          await RememberUserPrefs.saveUserInfo(userInfo);
+          //await RememberUserPrefs.saveUserInfo(userInfo);
 
           Future.delayed(
-            Duration(microseconds: 2000),
+            const Duration(microseconds: 2000),
             () {
-              // Get.to(() => DashboardOfFragments());
+              Get.to(() => const AdminPanel());
               // Get.to(() => OTPScreen(otp: otp));
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => OTPScreen(otp: otp)));
+              // Navigator.of(context).push(
+              //     MaterialPageRoute(builder: (context) => OTPScreen(otp: otp)));
             },
           );
         } else {
@@ -103,6 +100,10 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+      ),
       //backgroundColor: Colors.w,
       body: LayoutBuilder(
         builder: (context, cons) {
@@ -112,22 +113,28 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             child: SingleChildScrollView(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   //login screen header
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    height: 250,
+                    child: Image.asset("images/Admin1.png"),
+                  ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 30.0),
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      height: 285,
-                      child: Image.asset("images/login.png"),
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      "Admin Login",
+                      style: GoogleFonts.montserrat(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
-
                   //login sign in form
                   Padding(
-                    padding: const EdgeInsets.all(16.0),
+                    padding: const EdgeInsets.all(20.0),
                     child: Container(
                       decoration: const BoxDecoration(
                         color: tPrimaryColor,
@@ -158,16 +165,16 @@ class _LoginScreenState extends State<LoginScreen> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       TextFormField(
-                                        controller: studentIdController,
+                                        controller: usernameController,
                                         validator: (val) => val == ""
-                                            ? "Please enter your Student ID"
+                                            ? "Please enter your username"
                                             : null,
                                         decoration: InputDecoration(
                                           prefixIcon: const Icon(
                                             Icons.person_rounded,
                                             color: tSecondaryColor,
                                           ),
-                                          labelText: "Student ID",
+                                          labelText: "Username",
                                           labelStyle: GoogleFonts.poppins(
                                               fontSize: 18.0,
                                               fontWeight: FontWeight.w500,
@@ -218,89 +225,87 @@ class _LoginScreenState extends State<LoginScreen> {
                                       const SizedBox(
                                         height: 10,
                                       ),
-                                      Container(
-                                        padding:
-                                            const EdgeInsets.only(left: 20.0),
-                                        child: Text(
-                                          "Ex. 12-345-678",
-                                          style: GoogleFonts.poppins(
-                                            color: Colors.black87,
-                                          ),
-                                        ),
-                                      ),
+
                                       const SizedBox(
                                         height: 18,
                                       ),
                                       //email
-                                      TextFormField(
-                                        controller: emailController,
-                                        validator: (val) => val == ""
-                                            ? "Please enter your Email"
-                                            : null,
-                                        decoration: InputDecoration(
-                                          prefixIcon: const Icon(
-                                            Icons.email_rounded,
-                                            color: Color(0xFF820001),
-                                          ),
-                                          labelText: "Email",
-                                          labelStyle: GoogleFonts.poppins(
-                                              fontSize: 18.0,
-                                              fontWeight: FontWeight.w500,
-                                              color: Colors.black54),
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(30),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white60,
+                                      Obx(
+                                        () => TextFormField(
+                                          obscureText: isObsecure.value,
+                                          controller: passwordController,
+                                          validator: (val) => val == ""
+                                              ? "Please enter password"
+                                              : null,
+                                          decoration: InputDecoration(
+                                            prefixIcon: const Icon(
+                                              Icons.vpn_key_rounded,
+                                              color: Color(0xFF820001),
                                             ),
-                                          ),
-                                          enabledBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(30),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white60,
+                                            suffixIcon: Obx(
+                                              () => GestureDetector(
+                                                onTap: () {
+                                                  isObsecure.value =
+                                                      !isObsecure.value;
+                                                },
+                                                child: Icon(
+                                                  isObsecure.value
+                                                      ? Icons.visibility_off
+                                                      : Icons.visibility,
+                                                  color: Colors.black,
+                                                ),
+                                              ),
                                             ),
-                                          ),
-                                          focusedBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(30),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white60,
+                                            labelText: "Password",
+                                            labelStyle: GoogleFonts.poppins(
+                                                fontSize: 18.0,
+                                                fontWeight: FontWeight.w500,
+                                                color: Colors.black54),
+                                            border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(30),
+                                              borderSide: const BorderSide(
+                                                color: Colors.white60,
+                                              ),
                                             ),
-                                          ),
-                                          disabledBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(30),
-                                            borderSide: const BorderSide(
-                                              color: Colors.white60,
+                                            enabledBorder: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(30),
+                                              borderSide: const BorderSide(
+                                                color: Colors.white60,
+                                              ),
                                             ),
+                                            focusedBorder: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(30),
+                                              borderSide: const BorderSide(
+                                                color: Colors.white60,
+                                              ),
+                                            ),
+                                            disabledBorder: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(30),
+                                              borderSide: const BorderSide(
+                                                color: Colors.white60,
+                                              ),
+                                            ),
+                                            contentPadding:
+                                                const EdgeInsets.symmetric(
+                                              horizontal: 14,
+                                              vertical: 6,
+                                            ),
+                                            fillColor: Colors.white,
+                                            filled: true,
                                           ),
-                                          contentPadding:
-                                              const EdgeInsets.symmetric(
-                                            horizontal: 14,
-                                            vertical: 6,
+                                          style: GoogleFonts.poppins(
+                                            fontSize: 18.0,
+                                            fontWeight: FontWeight.w500,
+                                            color: Colors.grey[900],
                                           ),
-                                          fillColor: Colors.white,
-                                          filled: true,
-                                        ),
-                                        style: GoogleFonts.poppins(
-                                          fontSize: 18.0,
-                                          fontWeight: FontWeight.w500,
-                                          color: Colors.grey[900],
                                         ),
                                       ),
                                       const SizedBox(
                                         height: 10,
-                                      ),
-                                      Container(
-                                        padding:
-                                            const EdgeInsets.only(left: 20.0),
-                                        child: Text(
-                                          "Ex. student@cit.edu",
-                                          style: GoogleFonts.poppins(
-                                            color: Colors.black87,
-                                          ),
-                                        ),
                                       ),
 
                                       const SizedBox(
@@ -325,15 +330,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                         borderRadius: BorderRadius.circular(30),
                                         child: InkWell(
                                           onTap: () {
-                                            if (formKey.currentState!
-                                                .validate()) {
-                                              loginUserNow(context);
-                                            }
+                                            loginUserNow();
                                           },
                                           borderRadius:
                                               BorderRadius.circular(30),
                                           child: Padding(
-                                            padding: EdgeInsets.symmetric(
+                                            padding: const EdgeInsets.symmetric(
                                               vertical: 10,
                                               horizontal: 28,
                                             ),
@@ -360,14 +362,14 @@ class _LoginScreenState extends State<LoginScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  "Are you an Admin?",
+                                  "Are you an Student?",
                                   style: GoogleFonts.poppins(
                                     color: Colors.black87,
                                   ),
                                 ),
                                 TextButton(
                                   onPressed: () {
-                                    Get.to(() => AdminLogin());
+                                    Get.to(() => const LoginScreen());
                                   },
                                   child: Text(
                                     "Click Here",

@@ -46,6 +46,7 @@ dependencies:
   flutter_otp_text_field: ^1.1.0+2
   otp: 3.1.1
   google_nav_bar: ^5.0.6
+  image_picker: ^0.8.6
 
 dev_dependencies:
   flutter_test:

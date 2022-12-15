@@ -80,6 +80,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+      ),
       //backgroundColor: Colors.black,
       body: LayoutBuilder(
         builder: (context, cons) {
@@ -100,15 +104,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ),
                   Text(
-                    "CREATE USER",
+                    "Add Student",
                     style: GoogleFonts.montserrat(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
+                  const SizedBox(
+                    height: 10,
+                  ),
                   //signup form
                   Padding(
-                    padding: const EdgeInsets.all(16.0),
+                    padding: const EdgeInsets.all(20.0),
                     child: Container(
                       decoration: const BoxDecoration(
                         color: tPrimaryColor,
@@ -248,10 +255,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     height: 18,
                                   ),
 
-                                  const SizedBox(
-                                    height: 18,
-                                  ),
-
                                   //button
                                   Material(
                                     color: tSecondaryColor,
@@ -279,32 +282,35 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       ),
                                     ),
                                   ),
+                                  const SizedBox(
+                                    height: 18,
+                                  ),
                                 ],
                               ),
                             ),
                             //dont have an account btn
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  "Already have an Account?",
-                                  style: GoogleFonts.poppins(
-                                    fontSize: 12,
-                                    color: Colors.black87,
-                                  ),
-                                ),
-                                TextButton(
-                                  onPressed: () {
-                                    Get.to(() => LoginScreen());
-                                  },
-                                  child: Text("Login Here",
-                                      style: GoogleFonts.poppins(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w500,
-                                          color: tSecondaryColor)),
-                                ),
-                              ],
-                            ),
+                            // Row(
+                            //   mainAxisAlignment: MainAxisAlignment.center,
+                            //   children: [
+                            //     Text(
+                            //       "Already have an Account?",
+                            //       style: GoogleFonts.poppins(
+                            //         fontSize: 12,
+                            //         color: Colors.black87,
+                            //       ),
+                            //     ),
+                            //     TextButton(
+                            //       onPressed: () {
+                            //         Get.to(() => LoginScreen());
+                            //       },
+                            //       child: Text("Login Here",
+                            //           style: GoogleFonts.poppins(
+                            //               fontSize: 14,
+                            //               fontWeight: FontWeight.w500,
+                            //               color: tSecondaryColor)),
+                            //     ),
+                            //   ],
+                            // ),
                           ],
                         ),
                       ),

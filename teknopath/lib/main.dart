@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:teknopath/splash%20screen/splash_screen.dart';
-import 'package:teknopath/users/authentication/login_screen.dart';
 import 'package:teknopath/users/fragments/dashboard_of_fragmets.dart';
 import 'package:teknopath/users/userPreferences/user_preferences.dart';
 import 'package:teknopath/utils/theme/theme.dart';

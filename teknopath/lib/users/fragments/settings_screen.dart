@@ -14,7 +14,7 @@ class SettingsScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          Text("Settings"),
+          const Text("Settings"),
           Material(
             color: tSecondaryColor,
             borderRadius: BorderRadius.circular(30),
@@ -22,7 +22,7 @@ class SettingsScreen extends StatelessWidget {
               onTap: () {},
               borderRadius: BorderRadius.circular(30),
               child: Padding(
-                padding: EdgeInsets.symmetric(
+                padding: const EdgeInsets.symmetric(
                   vertical: 10,
                   horizontal: 28,
                 ),

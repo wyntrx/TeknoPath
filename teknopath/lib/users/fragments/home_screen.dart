@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:teknopath/admin/view_building.dart';
 import 'package:teknopath/constants/colors.dart';
-import 'package:teknopath/users/fragments/about_us_screen.dart';
-import 'package:teknopath/users/fragments/profile_fragment.dart';
-import 'package:teknopath/users/fragments/settings_screen.dart';
 import 'package:teknopath/users/userPreferences/current_user.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -57,36 +55,34 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Container(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Welcome Student!",
-                          style: GoogleFonts.montserrat(
-                            fontWeight: FontWeight.w400,
-                            fontSize: 16,
-                            color: Colors.black87,
-                          ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Welcome Student!",
+                        style: GoogleFonts.montserrat(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 16,
+                          color: Colors.black87,
                         ),
-                        Text(
-                          _currentUser.student.student_id,
-                          style: GoogleFonts.montserrat(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 20,
-                            color: Colors.black87,
-                          ),
+                      ),
+                      Text(
+                        _currentUser.student.student_id,
+                        style: GoogleFonts.montserrat(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 20,
+                          color: Colors.black87,
                         ),
-                        Text(
-                          _currentUser.student.student_email,
-                          style: GoogleFonts.montserrat(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 14,
-                              color: Colors.black87),
-                        ),
-                      ],
-                    ),
+                      ),
+                      Text(
+                        _currentUser.student.student_email,
+                        style: GoogleFonts.montserrat(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 14,
+                            color: Colors.black87),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -142,199 +138,60 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20.0),
+            InkWell(
+              onTap: () {
+                Get.to(() => const ViewBuilding());
+              },
+              child: Ink(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                child: Container(
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: tPrimaryColor,
+                    borderRadius: BorderRadius.circular(30),
+                    boxShadow: [
+                      const BoxShadow(
+                        color: Color(0xFF999367),
+                        blurRadius: 3,
+                        offset: Offset(1, 1),
+                      ),
+                      BoxShadow(
+                        color: Colors.grey.shade300,
+                        offset: const Offset(-2, 0),
+                        blurRadius: 3,
+                      ),
+                    ],
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Icon(
+                        Icons.location_on,
+                        size: 30,
+                        color: Color(0xFF820001),
+                      ),
+                      Text("Buildings",
+                          style: GoogleFonts.montserrat(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black87,
+                          )),
+                      const Icon(
+                        Icons.arrow_forward_ios,
+                        size: 30,
+                        color: Colors.white,
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ),
+
             //Search
 
             const SizedBox(height: 20.0),
-            //Banners
-            Text(
-              "Recently",
-              style: GoogleFonts.montserrat(
-                  fontWeight: FontWeight.bold, fontSize: 20),
-            ),
-            const SizedBox(height: 20.0),
-            SizedBox(
-              height: 200,
-              child: ListView(
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                children: [
-                  SizedBox(
-                    width: 320,
-                    height: 200,
-                    child: Padding(
-                      padding: const EdgeInsets.only(right: 10),
-                      child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30),
-                            image: const DecorationImage(
-                              image: AssetImage("images/building1.jpg"),
-                              fit: BoxFit.cover,
-                            )),
-                        padding: const EdgeInsets.all(10),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Flexible(
-                              child: SizedBox(
-                                width: double.infinity,
-                                height: 50,
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(30),
-                                      ),
-                                      backgroundColor: const Color.fromARGB(
-                                          178, 255, 255, 255)),
-                                  onPressed: () {},
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      const Icon(
-                                        Icons.location_on,
-                                        color: tSecondaryColor,
-                                      ),
-                                      const SizedBox(
-                                        width: 10,
-                                      ),
-                                      Text(
-                                        "New Building",
-                                        style: GoogleFonts.montserrat(
-                                          color: const Color.fromARGB(
-                                              255, 54, 54, 54),
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 320,
-                    height: 200,
-                    child: Padding(
-                      padding: const EdgeInsets.only(right: 10),
-                      child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30),
-                            image: const DecorationImage(
-                              image: AssetImage("images/building2.jpg"),
-                              fit: BoxFit.cover,
-                            )),
-                        padding: const EdgeInsets.all(10),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Flexible(
-                              child: SizedBox(
-                                width: double.infinity,
-                                height: 50,
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(30),
-                                      ),
-                                      backgroundColor: const Color.fromARGB(
-                                          178, 255, 255, 255)),
-                                  onPressed: () {},
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      const Icon(
-                                        Icons.location_on,
-                                        color: tSecondaryColor,
-                                      ),
-                                      const SizedBox(
-                                        width: 10,
-                                      ),
-                                      Text(
-                                        "New Building",
-                                        style: GoogleFonts.montserrat(
-                                          color: const Color.fromARGB(
-                                              255, 54, 54, 54),
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 320,
-                    height: 200,
-                    child: Padding(
-                      padding: const EdgeInsets.only(right: 10),
-                      child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30),
-                            image: const DecorationImage(
-                              image: AssetImage("images/building3.jpg"),
-                              fit: BoxFit.cover,
-                            )),
-                        padding: const EdgeInsets.all(10),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Flexible(
-                              child: SizedBox(
-                                width: double.infinity,
-                                height: 50,
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(30),
-                                      ),
-                                      backgroundColor: const Color.fromARGB(
-                                          178, 255, 255, 255)),
-                                  onPressed: () {},
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      const Icon(
-                                        Icons.location_on,
-                                        color: Color(0xFF820001),
-                                      ),
-                                      const SizedBox(
-                                        width: 10,
-                                      ),
-                                      Text(
-                                        "New Building",
-                                        style: GoogleFonts.montserrat(
-                                          color: const Color.fromARGB(
-                                              255, 54, 54, 54),
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
           ],
         ),
       ),
