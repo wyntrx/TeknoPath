@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:get/get.dart';
-
+import 'package:teknopath/users/userPreferences/current_user.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:teknopath/constants/sizes.dart';
 import 'package:teknopath/users/fragments/dashboard_of_fragmets.dart';
@@ -14,6 +14,8 @@ class OTPScreen extends StatelessWidget {
   String otp;
 
   OTPScreen({super.key, required this.otp});
+
+  final CurrentUser _currentUser = Get.put(CurrentUser());
 
   void verifyCode(BuildContext context, String inputCode) {
     if (otp == inputCode) {
@@ -54,7 +56,7 @@ class OTPScreen extends StatelessWidget {
             Text(
               // ignore: prefer_adjacent_string_concatenation, prefer_interpolation_to_compose_strings
               "We sent you a code at " +
-                  "user@cit.edu" +
+                  _currentUser.student.student_email +
                   "." +
                   " Please enter your otp code.",
               style: GoogleFonts.montserrat(

@@ -23,26 +23,6 @@ class DashboardOfFragments extends StatelessWidget {
     ProfileFragment(),
   ];
 
-  // final List _navigationButtonsProperties = [
-  //   {
-  //     "active_icon": Icons.home_rounded,
-  //     "non_active_icon": Icons.home_outlined,
-  //     "label": "Home",
-  //   },
-  //   {
-  //     "active_icon": Icons.map_rounded,
-  //     "non_active_icon": Icons.map_outlined,
-  //     "label": "Maps",
-  //   },
-  //   {
-  //     "active_icon": Icons.person_rounded,
-  //     "non_active_icon": Icons.person_outline_rounded,
-  //     "label": "Profile",
-  //   },
-  // ];
-
-  //RxInt _indexNumber = 0.obs;
-
   @override
   Widget build(BuildContext context) {
     return GetBuilder(
@@ -115,63 +95,3 @@ class DashboardOfFragments extends StatelessWidget {
     );
   }
 }
-// body: Obx(
-//             () => IndexedStack(
-//               index: bottomNavigationController.selectedIndex.value,
-//               children: _fragmentScreens,
-//             ),
-//           ),
-//           bottomNavigationBar: Container(
-//             //height: double.infinity,
-//             decoration: BoxDecoration(
-//               color: Colors.white,
-//               boxShadow: [
-//                 BoxShadow(
-//                   blurRadius: 20,
-//                   color: Colors.black.withOpacity(0.1),
-//                 )
-//               ],
-//             ),
-//             child: SafeArea(
-//               child: Padding(
-//                 padding:
-//                     const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-//                 child: GNav(
-//                   tabs: [
-//                     GButton(
-//                       icon: Icons.home_rounded,
-//                       text: "Home",
-//                     ),
-//                     GButton(
-//                       icon: Icons.map_rounded,
-//                       text: "Map",
-//                     ),
-//                     GButton(
-//                       icon: Icons.favorite_rounded,
-//                       text: "Favorites",
-//                     ),
-//                     GButton(
-//                       icon: Icons.person_rounded,
-//                       text: "Profile",
-//                     )
-//                   ],
-//                   rippleColor: Colors
-//                       .grey.shade800, // tab button ripple color when pressed
-//                   hoverColor: Colors.grey.shade400, // tab button hover color
-//                   haptic: true, // haptic feedback
-//                   tabBorderRadius: 30,
-//                   duration:
-//                       Duration(milliseconds: 300), // tab animation duration
-//                   gap: 8, // the tab button gap between icon and text
-//                   color: Colors.grey[800], // unselected icon color
-//                   activeColor: Colors.amber, // selected icon and text color
-//                   iconSize: 24, // tab button icon size
-//                   tabBackgroundColor: Colors.amber.withOpacity(0.1),
-//                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-//                   onTabChange: (value) {
-//                     bottomNavigationController.changeIndex(value);
-//                   }, // selected tab background color
-//                 ),
-//               ),
-//             ),
-//           ),
