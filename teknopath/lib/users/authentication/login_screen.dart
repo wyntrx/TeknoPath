@@ -70,7 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
         //var resBodyOfLogin = json.decode(response.body);
 
         if (resBodyOfLogin['success'] == true) {
-          Fluttertoast.showToast(msg: "Login Successful!");
+          Fluttertoast.showToast(msg: "OTP sent to your email");
 
           sendOTPToEmail(
               student_id: studentIdController.text.trim(),
