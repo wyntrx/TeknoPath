@@ -1,16 +1,30 @@
-# teknopath
+# TeknoPath
 
-A new Flutter project.
 
-## Getting Started
+A campus-based navigation helper with Augmented Reality
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Overview
+<br>
+This application uses Flutter as the main framework plus Unity to handle all Augmented Reality components.
+<br>
+<br>
+This mobile application is android specific and is not available for IOS devices.
+And not all android models will support ARCore.<br> Heres a list of ARCore compatible devices: https://developers.google.com/ar/devices <br>
+<br>
+<br>
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+### Known Problems
+- **Issue 1** <br>
+  <ul>
+    <li>Some networks do not allow you to connect to the deployed database when logging in. To bypass this problem a Virtual Private Network is required in order for you to login. 1</li>    
+  </ul>
+  <br
+
+  - **Issue 2** <br>
+  <ul>
+
+    <li>If the version of Google Play services for AR is 1.35.0+, TeknoPath will crash. To bypass this problem you have to uninstall Google Play services for AR and install Google play services version <strong>1.34.222640223</strong> (known stable version) </li>
+  </ul>
